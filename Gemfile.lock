@@ -93,6 +93,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   capybara
+  json
   rest-client
   rspec
   rubocop
