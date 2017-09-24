@@ -1,11 +1,9 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/marysalemme/Desktop/Dev/tech-tests/send-me-money/spec/features/login_spec.rb": [
+      "/Users/marysalemme/Desktop/Dev/tech-tests/send-me-money/spec/features/authentication_spec.rb": [
         1,
         null,
-        1,
-        1,
         1,
         1,
         1,
@@ -13,8 +11,11 @@
         1,
         null,
         null
+      ],
+      "/Users/marysalemme/Desktop/Dev/tech-tests/send-me-money/spec/models/cool_pay_spec.rb": [
+
       ]
     },
-    "timestamp": 1506189386
+    "timestamp": 1506270027
   }
 }
