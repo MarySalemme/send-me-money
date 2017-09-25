@@ -3,20 +3,22 @@ require 'json'
 
 class CoolPay
 
-  attr_reader :token
-
-  def initialize
+  def initialize(rest_client_class = RestClient)
+    @rest_client_class = rest_client_class
     @token = nil
   end
 
   def authenticate(username, key)
     body = req_body(username, key)
-
     headers = req_header
 
-    response = RestClient.post 'https://coolpay.herokuapp.com/api/login', body, headers
-    json = JSON.parse(response.body)
-    @token = json['token']
+    begin
+      response = @rest_client_class.post 'https://coolpay.herokuapp.com/api/login', body, headers
+    rescue RestClient::ExceptionWithResponse => exc
+      response = exc.response
+    end
+
+    response
   end
 
   private

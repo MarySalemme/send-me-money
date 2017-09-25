@@ -15,8 +15,8 @@ class App < Sinatra::Base
 
   post '/home' do
     @coolpay = CoolPay.new
-    @coolpay.authenticate(API_USER, API_KEY)
-    @token = @coolpay.token
+    auth_response = @coolpay.authenticate(API_USER, API_KEY)
+    @token = auth_response.body["token"]
     erb(:home)
   end
 end
