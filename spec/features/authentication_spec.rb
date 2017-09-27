@@ -1,4 +1,5 @@
 require './app.rb'
+require 'spec_helper'
 
 feature 'Authentication' do
   scenario 'is successful' do

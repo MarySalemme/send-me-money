@@ -7,6 +7,6 @@ feature 'Add new recipient' do
     click_button('New Recipient')
     fill_in(:name, with: 'John Doe')
     click_button('Submit')
-    expect(page).to have_content('Recipient added successfully')
+    expect(page).to have_content('John Doe has been added successfully')
   end
 end

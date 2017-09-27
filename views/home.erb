@@ -1,5 +1,12 @@
 <% if @token != nil %>
   <p>You are now authenticated</p>
+  <form action="/recipients/new" method="get">
+    <input type="submit" value="New Recipient">
+  </form>
 <% else %>
   <p>Something went wrong with your CoolPay key. Try again</p>
+<% end %>
+
+<% if @new_recipient != nil %>
+<p><%= @new_recipient %> has been added successfully</p>
 <% end %>
