@@ -30,3 +30,8 @@ def auth_response_body
     "token" => AUTH_TOKEN
   }
 end
+
+def authenticate
+  visit('/')
+  click_button('Authenticate')
+end
