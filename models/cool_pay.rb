@@ -11,13 +11,11 @@ class CoolPay
   def authenticate(username, key)
     body = req_body(username, key)
     headers = req_header
-# begin might not be necessary
     begin
       response = @rest_client_class.post 'https://coolpay.herokuapp.com/api/login', body, headers
     rescue RestClient::ExceptionWithResponse => exc
       response = exc.response
     end
-
     response
   end
 
