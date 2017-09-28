@@ -2,7 +2,7 @@ Choose who you want to send money to:
 <% @recipients.each do |recipient| %>
   <form action="/payments/new" method="get">
     <p><%= recipient['name'] %></p>
-    <input name="recipient-id" type="hidden" value="<%= recipient['id'] %>">
+    <input name="id" type="hidden" value="<%= recipient['id'] %>">
     <input type="submit" value="Choose">
   </form>
 <% end %>
