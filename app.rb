@@ -27,7 +27,6 @@ class App < Sinatra::Base
 
   get '/home' do
     @token = session[:token]
-    @new_recipient = session[:new_recipient]
     erb(:home)
   end
 
@@ -54,6 +53,7 @@ class App < Sinatra::Base
   end
 
   get '/payments/new' do
+    session[:id] = params[:id]
     erb(:'/payments/new')
   end
 end
