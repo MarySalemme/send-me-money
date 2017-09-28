@@ -27,6 +27,21 @@ class App < Sinatra::Base
 
   get '/home' do
     @token = session[:token]
+    @new_recipient = session[:new_recipient]
     erb(:home)
+  end
+
+  get '/recipients/new' do
+    
+    erb(:'/recipients/new')
+  end
+
+  post '/recipients' do
+    @token = session[:token]
+    @coolpay = CoolPay.new
+    new_recipient_response = @coolpay.add_recipient(params[:name], @token)
+    json = JSON.parse(new_recipient_response.body)
+    session[:new_recipient] = json['recipient']['name']
+    redirect '/home'
   end
 end

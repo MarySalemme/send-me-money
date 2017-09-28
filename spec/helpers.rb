@@ -10,6 +10,10 @@ def login_api_url
   'https://coolpay.herokuapp.com/api/login'
 end
 
+def recipient_api_url
+  'https://coolpay.herokuapp.com/api/recipients'
+end
+
 def req_body(username: VALID_USERNAME, apikey: VALID_KEY)
   {
     username: username,
@@ -25,8 +29,28 @@ def req_header(auth: nil)
   }
 end
 
+def req_recipient_body(name: 'John Doe')
+  {
+    recipient: {
+      name: name
+    }
+  }.to_json
+end
+
+def req_recipient_header
+  {
+    :content_type => 'application/json',
+    :authorization => "Bearer #{AUTH_TOKEN}"
+  }
+end
+
 def auth_response_body
   {
     "token" => AUTH_TOKEN
   }
+end
+
+def authenticate
+  visit('/')
+  click_button('Authenticate')
 end
