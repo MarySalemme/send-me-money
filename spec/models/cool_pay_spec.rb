@@ -77,7 +77,7 @@ describe CoolPay do
   describe '#make_payment' do
     it 'returns the payment response if successful' do
       response = coolpay.make_payment('100', '123456', AUTH_TOKEN)
-      result = response.body['payment']['status']
+      result = response.body[:payment][:status]
       expect(result).to eq 'processing'
     end
   end
