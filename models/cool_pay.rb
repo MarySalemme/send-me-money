@@ -21,9 +21,30 @@ class CoolPay
 
   def add_recipient(name, token)
     body = req_recipient_body(name)
-    headers = req_recipient_header(token)
+    headers = req_header(token)
     begin
       response = @rest_client_class.post 'https://coolpay.herokuapp.com/api/recipients', body, headers
+    rescue RestClient::ExceptionWithResponse => exc
+      response = exc.response
+    end
+    response
+  end
+
+  def list_recipients(token)
+    headers = req_header(token)
+    begin
+      response = @rest_client_class.get 'https://coolpay.herokuapp.com/api/recipients', headers
+    rescue RestClient::ExceptionWithResponse => exc
+      response = exc.response
+    end
+    response
+  end
+
+  def make_payment(amount, recipient_id, token)
+    body = req_payment_body(amount, recipient_id)
+    headers = req_header(token)
+    begin
+      response = @rest_client_class.post 'https://coolpay.herokuapp.com/api/payments', body, headers
     rescue RestClient::ExceptionWithResponse => exc
       response = exc.response
     end
@@ -39,10 +60,12 @@ class CoolPay
     }.to_json
   end
 
-  def req_header
-    {
+  def req_header(auth_token = nil)
+    header = {
       :content_type => 'application/json'
     }
+    header[:authorization] = "Bearer #{auth_token}" if auth_token
+    header
   end
 
   def req_recipient_body(name)
@@ -53,10 +76,13 @@ class CoolPay
     }.to_json
   end
 
-  def req_recipient_header(token)
+  def req_payment_body(amount, recipient_id)
     {
-      :content_type => 'application/json',
-      :authorization => "Bearer #{token}"
-    }
+      payment: {
+        amount: amount,
+        currency: "GBP",
+        recipient_id: recipient_id
+      }
+    }.to_json
   end
 end

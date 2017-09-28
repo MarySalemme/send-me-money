@@ -1,0 +1,23 @@
+Choose who you want to send money to:
+
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipients.each do |recipient| %>
+        <tr>
+          <td>
+            <form action="/payments/new" method="get">
+              <p><%= recipient['name'] %></p>
+              <input name="id" type="hidden" value="<%= recipient['id'] %>">
+              <input type="submit" value="Make payment" class="btn btn-primary">
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
