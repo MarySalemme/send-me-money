@@ -20,8 +20,8 @@ class App < Sinatra::Base
   post '/home' do
     @coolpay = CoolPay.new
     auth_response = @coolpay.authenticate(API_USER, API_KEY)
-    json = JSON.parse(auth_response.body)
-    session[:token] = json['token']
+    authentication_json = JSON.parse(auth_response.body)
+    session[:token] = authentication_json['token']
     redirect '/home'
   end
 
@@ -32,7 +32,6 @@ class App < Sinatra::Base
   end
 
   get '/recipients/new' do
-    
     erb(:'/recipients/new')
   end
 
@@ -40,8 +39,21 @@ class App < Sinatra::Base
     @token = session[:token]
     @coolpay = CoolPay.new
     new_recipient_response = @coolpay.add_recipient(params[:name], @token)
-    json = JSON.parse(new_recipient_response.body)
-    session[:new_recipient] = json['recipient']['name']
+    new_recipient_json = JSON.parse(new_recipient_response.body)
+    session[:new_recipient] = new_recipient_json['recipient']['name']
     redirect '/home'
+  end
+
+  get '/recipients' do
+    @token = session[:token]
+    @coolpay = CoolPay.new
+    recipients_response = @coolpay.list_recipients(@token)
+    recipients_json = JSON.parse(recipients_response.body)
+    @recipients = recipients_json['recipients']
+    erb(:'/recipients/show')
+  end
+
+  get '/payments/new' do
+    erb(:'/payments/new')
   end
 end

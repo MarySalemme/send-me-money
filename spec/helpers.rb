@@ -50,7 +50,25 @@ def auth_response_body
   }
 end
 
+def new_recipient_response_body
+  {
+    "recipient"=>{"name"=>"John Doe", "id"=>"cc3a4eef-c370-4a86-ad8e-f246dda4dfb6"}
+  }
+end
+
+def recipient_list_response_body
+  {
+    "recipients"=>[{"name"=>"John Doe", "id"=>"123456"}]
+  }
+end
+
 def authenticate
   visit('/')
   click_button('Authenticate')
+end
+
+def add_recipient
+  click_button('New Recipient')
+  fill_in(:name, with: 'John Doe')
+  click_button('Submit')
 end
