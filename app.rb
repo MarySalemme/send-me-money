@@ -10,7 +10,7 @@ class App < Sinatra::Base
   API_USER = settings.coolpay_username
   API_KEY = settings.coolpay_apikey
 
-  configure(:development) { set :session_secret, "something" }
+  configure(:development) { set :session_secret, 'something' }
   enable :sessions
 
   get '/' do

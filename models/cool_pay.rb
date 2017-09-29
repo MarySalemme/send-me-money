@@ -2,7 +2,6 @@ require 'rest_client'
 require 'json'
 
 class CoolPay
-
   def initialize(rest_client_class = RestClient)
     @rest_client_class = rest_client_class
     @token = nil
@@ -62,7 +61,7 @@ class CoolPay
 
   def req_header(auth_token = nil)
     header = {
-      :content_type => 'application/json'
+      content_type: 'application/json'
     }
     header[:authorization] = "Bearer #{auth_token}" if auth_token
     header
@@ -80,7 +79,7 @@ class CoolPay
     {
       payment: {
         amount: amount,
-        currency: "GBP",
+        currency: 'GBP',
         recipient_id: recipient_id
       }
     }.to_json

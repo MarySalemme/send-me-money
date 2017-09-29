@@ -1,14 +1,13 @@
 require 'spec_helper'
 
 describe CoolPay do
-
-  let(:rest_client) { double "RestClient" }
-  let(:authenticated_response) { double "RestClient::Response", code: 200 }
-  let(:recipient_response) { double "RestClient::Response", code: 200 }
-  let(:recipient_list_response) { double "RestClent::Response", code: 200 }
-  let(:payment_response) { double "RestClent::Response", code: 200 }
-  let(:fail_auth_response) { double "RestClent::Response", code: 404 }
-  let(:fail_auth_exception) { double "RestClient::ExceptionWithResponse" }
+  let(:rest_client) { double 'RestClient' }
+  let(:authenticated_response) { double 'RestClient::Response', code: 200 }
+  let(:recipient_response) { double 'RestClient::Response', code: 200 }
+  let(:recipient_list_response) { double 'RestClent::Response', code: 200 }
+  let(:payment_response) { double 'RestClent::Response', code: 200 }
+  let(:fail_auth_response) { double 'RestClent::Response', code: 404 }
+  let(:fail_auth_exception) { double 'RestClient::ExceptionWithResponse' }
   subject(:coolpay) { described_class.new(rest_client) }
 
   before :each do
@@ -42,11 +41,6 @@ describe CoolPay do
     allow(rest_client)
       .to receive(:post)
       .with(payment_api_url, req_payment_body, req_recipient_header) { payment_response }
-
-    # allow(rest_client)
-    #   .to receive(:post)
-    #   .with(login_api_url, req_body(username: INVALID_USERNAME, apikey: INVALID_KEY), req_header)
-    #   .and_raise( fail_auth_exception )
   end
 
   describe '#authenticate' do
@@ -70,7 +64,7 @@ describe CoolPay do
       coolpay.add_recipient('John Doe', AUTH_TOKEN)
       response = coolpay.list_recipients(AUTH_TOKEN)
       result = response.body['recipients']
-      expect(result).to eq [{"name"=>"John Doe", "id"=>"123456"}]
+      expect(result).to eq [{ 'name' => 'John Doe', 'id' => '123456' }]
     end
   end
 
