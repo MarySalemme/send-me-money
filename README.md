@@ -1,4 +1,5 @@
 # Send Me Money
+A small app that uses Coolplay API.
 
 ### Instructions
 `$ git clone https://github.com/MarySalemme/send-me-money.git`  
